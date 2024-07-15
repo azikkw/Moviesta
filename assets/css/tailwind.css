@@ -1,0 +1,96 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Custom font-family */
+@font-face {
+    font-family: Satoshi;
+    src: url("/assets/font/Satoshi-Variable.ttf");
+}
+
+/* Movie Page */
+.movie-page {
+    @apply relative w-full h-screen bg-back-color text-white overflow-x-hidden;
+}
+/* Back button for Movie Page*/
+.back-btn {
+    @apply absolute left-[15px] lg:left-16 top-7 lg:top-12 z-[2] w-[38px] h-[38px] bg-[#FFFFFF3C] rounded-[50%] flex justify-center items-center backdrop-blur-[3px];
+}
+.back-btn img {
+    @apply size-[21px] ml-1.5;
+}
+/* Movie Poster*/
+.movie-poster {
+    @apply w-full lg:h-screen lg:object-cover absolute left-0 top-0 z-[0];
+}
+.poster-shadow {
+    @apply w-full h-[60px] bg-back-color absolute left-0 bottom-0 lg:-bottom-16 -z-[1];
+    /* Box shadows for smooth transition between poster and info side */
+    box-shadow: 10px -5px 10px #090E17,
+                -10px -5px 10px #090E17,
+                10px -15px 40px #090E17,
+                -10px -15px 40px #090E17,
+                10px -25px 70px #090E17,
+                -10px -25px 70px #090E17,
+                10px -50px 100px #090E17,
+                -10px -50px 100px #090E17;
+}
+.movie-trailer.larger {
+    @apply hidden lg:hidden w-full h-screen justify-center items-center absolute left-0 top-0 z-10 bg-[#090E17CB];
+}
+.movie-trailer.larger iframe {
+    @apply w-[80%] h-[80%] rounded-xl;
+}
+/* Movie page top side */
+.movie-top {
+    @apply relative z-[1] h-[490px] lg:h-[85%] flex flex-col justify-end px-[15px] lg:px-16 before:w-full before:h-full before:bg-back-color before:absolute before:left-0 before:top-0 before:-z-[1] before:opacity-30;
+}
+.movie-rating {
+    @apply w-fit px-2 lg:px-3 rounded bg-green-500 text-[15px] lg:text-[17px] font-bold mb-[7px] lg:mb-2.5;
+}
+.movie-title {
+    @apply text-[23px] lg:text-3xl font-medium;
+}
+.movie-genres {
+    @apply flex flex-wrap gap-3 lg:gap-4 mt-3 lg:mt-4;
+}
+.movie-genres li {
+    @apply bg-[#0A2338] border border-[#209CF9] rounded-[20px] lg:rounded-[30px] px-3.5 lg:px-7 pt-[5px] lg:pt-2 pb-[6px] lg:pb-[9px] text-[15px] lg:text-[17px] text-[#209CF9] font-medium;
+}
+.movie-actions {
+    @apply flex items-center gap-8 mt-7 lg:mt-8;
+}
+.trailer-btn {
+    @apply bg-[#088AF5] text-[17.5px] lg:text-xl font-medium px-10 lg:px-12 py-3 lg:py-4 rounded-[40px];
+}
+.favorite-btn {
+    @apply p-[13px] lg:p-4 bg-[#FFFFFF3C] rounded-[50%] flex justify-center items-center backdrop-blur-[3px];
+}
+.favorite-btn span {
+    @apply size-[22px] lg:size-[24px];
+}
+/* Movie page bottom side*/
+.movie-bottom {
+    @apply relative z-[1] w-full bg-back-color px-[15px] lg:px-16 py-7 lg:py-9;
+}
+.movie-info {
+    @apply flex gap-3 lg:gap-5 mb-3 lg:text-lg;
+}
+.movie-age {
+    @apply px-2.5 lg:px-3 border border-[#787878] text-[15px] lg:text-[17px] font-medium;
+}
+.movie-description {
+    @apply opacity-70 lg:text-lg lg:w-[60%];
+}
+.movie-additional-info li {
+    @apply mt-5 lg:mt-7 text-lg lg:text-xl font-medium;
+}
+.movie-additional-info li p {
+    @apply text-[16px] lg:text-lg font-normal opacity-70 lg:mt-0.5;
+}
+.movie-trailer {
+    @apply lg:hidden w-full !text-xl;
+}
+.movie-trailer iframe {
+    @apply w-full h-[220px] rounded-lg mt-2;
+}

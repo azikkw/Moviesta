@@ -3,7 +3,9 @@
 </script>
 
 <template>
+  <div class="font-satoshi">
 
+  </div>
 </template>
 
 <style scoped>
