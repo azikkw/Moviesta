@@ -15,8 +15,13 @@ export default {
         satoshi: ['Satoshi', 'sans-serif'],
       },
       backgroundColor: {
-        'back-color': '#090E17',
-      }
+        'back-color-1': '#0A101B',
+        'back-color-2': '#090E17'
+      },
+      boxShadow: {
+        'custom': '0 0 50px rgba(0, 0, 0, 0.5)',
+        'header': '2px 0 10px rgba(0, 0, 0, 0.2)',
+      },
     }
   },
   plugins: [],

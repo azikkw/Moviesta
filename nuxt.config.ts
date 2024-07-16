@@ -8,12 +8,12 @@ export default defineNuxtConfig({
     host: '0.0.0.0',
     port: 3000
   },
-  modules: ["@nuxtjs/tailwindcss", "@nuxt/icon"],
+  modules: ["@nuxtjs/tailwindcss", "@nuxt/icon", "@nuxt/image"],
   app: {
     head: {
       title: "Moviesta",
       link: [
-        { rel: 'icon', type: 'image/png', href: '/logo.png' }
+        { rel: 'icon', type: 'image/png', href: '/favicon.png' }
       ],
       htmlAttrs: {
         lang: 'en'

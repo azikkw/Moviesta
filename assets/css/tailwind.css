@@ -8,89 +8,256 @@
     src: url("/assets/font/Satoshi-Variable.ttf");
 }
 
+body {
+    @apply bg-back-color-1;
+}
+
+/* Scrollbars */
+.result::-webkit-scrollbar,
+body::-webkit-scrollbar {
+    @apply lg:w-1.5;
+}
+.result::-webkit-scrollbar,
+body::-webkit-scrollbar-track {
+    @apply bg-transparent;
+}
+.result::-webkit-scrollbar-thumb,
+body::-webkit-scrollbar-thumb {
+    @apply lg:bg-[#088AF5] lg:rounded-[3px];
+}
+
+/* Header */
+header {
+    @apply w-full h-20 fixed left-0 top-0 z-20 shadow-header flex items-center bg-back-color-2 px-[15px] sm:px-9 lg:px-16;
+}
+.logo {
+    @apply w-auto h-[32px] sm:h-[25px] lg:h-[19px] m-0 sm:mr-20;
+}
+nav {
+    @apply flex-1 flex items-center justify-center sm:justify-start;
+}
+nav ul {
+    @apply flex gap-5 lg:gap-6;
+}
+nav ul li a {
+    @apply flex items-center gap-2 opacity-65 lg:opacity-80 lg:hover:opacity-100 transition-opacity duration-200;
+}
+nav ul li a p {
+    @apply hidden md:block md:text-lg;
+}
+nav ul li a span {
+    @apply size-[26px] sm:size-7 lg:size-5 lg:mb-0.5;
+}
+/* Active route style */
+.router-link-exact-active {
+    @apply font-medium opacity-100;
+}
+.router-link-exact-active span {
+    @apply text-[#209CF9];
+}
+/* Search window */
+.search-window {
+    @apply relative;
+}
+.search-window.active {
+    @apply w-full h-screen overflow-hidden absolute left-0 top-0 z-50 bg-back-color-2 pt-6 sm:pt-8;
+}
+.search {
+    @apply relative;
+}
+.search-window.active .search {
+    @apply flex items-center gap-3 sm:gap-5 px-[15px] sm:px-16 md:px-[100px] mb-6 sm:mb-7;
+}
+.search-input {
+    @apply hidden lg:block w-[370px] h-[36px] sm:h-11 lg:h-[36px] rounded-lg border border-[#424c61] bg-transparent px-[50px] text-[15px] sm:text-[16px] lg:text-[15px] focus:outline-none focus:border-[#209CF9];
+}
+.search-window.active .search-input {
+    @apply w-full block px-[45px] sm:px-[50px];
+}
+.search-icon {
+    @apply size-[26px] sm:size-7 lg:size-[17px] mt-1.5 lg:mt-0 lg:absolute lg:left-6 lg:top-1/2 lg:-translate-y-1/2 lg:pointer-events-none;
+}
+.search-window.active .search-icon {
+    @apply size-[18px] sm:size-5 absolute left-[33px] sm:left-[85px] md:left-[120px] top-1/2 -translate-y-1/2 mt-0;
+}
+.close-btn {
+    @apply hidden text-[18px] sm:text-[19px];
+}
+.search-window.active .close-btn {
+    @apply block;
+}
+.search-input:focus + span {
+    @apply text-[#209CF9];
+}
+/* Search result */
+.result {
+    @apply hidden w-full h-[calc(100%-60px)] lg:h-auto lg:max-h-[380px] overflow-y-auto lg:absolute lg:left-0 lg:top-[44px] bg-back-color-2 rounded-lg border border-[#424c61] lg:p-[15px];
+}
+.search-window.active .result {
+    @apply block border-none px-[15px] sm:px-16 md:px-[100px] lg:px-[15px];
+}
+.result li a {
+    @apply flex items-center gap-4 sm:gap-5 lg:gap-4 mb-[15px];
+}
+.result li:last-child a {
+    @apply mb-[100px] lg:mb-0;
+}
+.result li a img {
+    @apply w-[52px] sm:w-[70px] lg:w-[52px] h-auto;
+}
+.result-movie-info {
+    @apply flex-1 overflow-hidden font-medium lg:font-normal;
+}
+.result-movie-info p:first-child {
+    @apply text-[17px] sm:text-[19px] lg:text-[17px] overflow-hidden overflow-ellipsis whitespace-nowrap;
+}
+.result-movie-info p:last-child {
+    @apply opacity-70 sm:text-[17px] lg:text-[16px];
+}
+.result-movie-rating {
+    @apply text-[17px] sm:text-xl lg:text-[16px] font-medium text-green-500 ml-5;
+}
+
+/* Footer */
+footer {
+    @apply bg-back-color-1 flex justify-center py-6 border-t border-[#1a1f2b];
+}
+footer a {
+    @apply flex items-center opacity-70 lg:hover:opacity-100 text-[16px] lg:text-[15px] gap-2;
+}
+
+/* Favorites Page */
+.favorites-page {
+    @apply h-full px-[15px] sm:px-9 lg:px-16 pt-5 pb-10 sm:py-10;
+}
+.title {
+    @apply text-xl sm:text-[27px] lg:text-3xl xl:text-3xl font-medium mb-3 sm:mb-5 lg:mb-8;
+}
+.movies-list {
+    @apply grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 sm:gap-x-2.5 gap-y-2.5 lg:gap-y-3.5;
+}
+.movie-card {
+    @apply h-[115px] sm:h-auto relative flex items-center bg-back-color-2 gap-4 sm:gap-0 rounded-[7px] sm:rounded-[2px] px-1 sm:p-0 cursor-pointer lg:hover:scale-110 lg:hover:z-10 lg:hover:shadow-custom lg:transition-all lg:duration-300;
+}
+.movie-card-img {
+    @apply w-auto sm:w-full h-[94%] sm:h-auto rounded-l-[4px] sm:rounded-[1px];
+}
+.movie-card-info {
+    @apply flex-1 overflow-hidden;
+}
+.movie-card-name {
+    @apply flex-1 sm:w-full sm:text-end text-[17px] md:text-xl lg:text-lg font-medium sm:absolute sm:right-0 sm:bottom-0 sm:backdrop-blur-[1.5px] sm:px-4 sm:pb-2 sm:pt-1 overflow-hidden overflow-ellipsis whitespace-nowrap;
+}
+.movie-card-year {
+    @apply lg:hidden opacity-65;
+}
+.movie-rating.card {
+    @apply sm:absolute sm:left-2.5 sm:top-2.5 m-0 px-0 sm:px-2 lg:px-2.5 text-[15px] md:text-[16px] lg:text-[15px] text-green-500 sm:text-white bg-transparent sm:bg-green-500 opacity-90 sm:opacity-100 leading-[1.6] sm:leading-[1.45];
+}
+.rates-count {
+    @apply text-xs opacity-60 mt-[5px];
+}
+.movie-card span {
+    @apply sm:hidden mr-3 size-[22px] opacity-40;
+}
+
 /* Movie Page */
 .movie-page {
-    @apply relative w-full h-screen bg-back-color text-white overflow-x-hidden;
+    @apply relative w-full h-full bg-back-color-2 text-white;
 }
 /* Back button for Movie Page*/
 .back-btn {
-    @apply absolute left-[15px] lg:left-16 top-7 lg:top-12 z-[2] w-[38px] h-[38px] bg-[#FFFFFF3C] rounded-[50%] flex justify-center items-center backdrop-blur-[3px];
+    @apply absolute left-[15px] sm:left-10 lg:left-16 top-7 sm:top-12 z-[2] w-[38px] h-[38px] bg-[#FFFFFF3C] rounded-[50%] flex justify-center items-center backdrop-blur-[3px] lg:hover:bg-[#FFFFFF4C] transition-all duration-200;
 }
-.back-btn img {
-    @apply size-[21px] ml-1.5;
+.back-btn span {
+    @apply size-[24px] mt-[3px];
 }
 /* Movie Poster*/
 .movie-poster {
     @apply w-full lg:h-screen lg:object-cover absolute left-0 top-0 z-[0];
 }
 .poster-shadow {
-    @apply w-full h-[60px] bg-back-color absolute left-0 bottom-0 lg:-bottom-16 -z-[1];
+    @apply w-full h-[55px] bg-back-color-2 absolute left-0 bottom-0 lg:-bottom-16 -z-[1];
     /* Box shadows for smooth transition between poster and info side */
     box-shadow: 10px -5px 10px #090E17,
                 -10px -5px 10px #090E17,
-                10px -15px 40px #090E17,
-                -10px -15px 40px #090E17,
-                10px -25px 70px #090E17,
-                -10px -25px 70px #090E17,
+                10px -15px 25px #090E17,
+                -10px -15px 25px #090E17,
+                10px -25px 50px #090E17,
+                -10px -25px 50px #090E17,
+                10px -35px 80px #090E17,
+                -10px -35px 80px #090E17,
                 10px -50px 100px #090E17,
                 -10px -50px 100px #090E17;
 }
-.movie-trailer.larger {
-    @apply hidden lg:hidden w-full h-screen justify-center items-center absolute left-0 top-0 z-10 bg-[#090E17CB];
-}
-.movie-trailer.larger iframe {
-    @apply w-[80%] h-[80%] rounded-xl;
-}
 /* Movie page top side */
 .movie-top {
-    @apply relative z-[1] h-[490px] lg:h-[85%] flex flex-col justify-end px-[15px] lg:px-16 before:w-full before:h-full before:bg-back-color before:absolute before:left-0 before:top-0 before:-z-[1] before:opacity-30;
+    @apply relative z-[1] h-[calc(100%-235px)] lg:h-[85%] flex flex-col justify-end px-[15px] sm:px-10 lg:px-16 before:w-full before:h-full before:bg-back-color-2 before:absolute before:left-0 before:top-0 before:-z-[1] before:opacity-30;
 }
 .movie-rating {
-    @apply w-fit px-2 lg:px-3 rounded bg-green-500 text-[15px] lg:text-[17px] font-bold mb-[7px] lg:mb-2.5;
+    @apply w-fit px-2 sm:px-3 rounded-[1px] bg-green-500 text-[15px] sm:text-[17px] font-bold mb-[7px] sm:mb-2.5;
 }
 .movie-title {
-    @apply text-[23px] lg:text-3xl font-medium;
+    @apply text-[23px] sm:text-3xl font-medium;
 }
 .movie-genres {
-    @apply flex flex-wrap gap-3 lg:gap-4 mt-3 lg:mt-4;
+    @apply flex flex-wrap gap-3 sm:gap-4 mt-3 sm:mt-4;
 }
 .movie-genres li {
-    @apply bg-[#0A2338] border border-[#209CF9] rounded-[20px] lg:rounded-[30px] px-3.5 lg:px-7 pt-[5px] lg:pt-2 pb-[6px] lg:pb-[9px] text-[15px] lg:text-[17px] text-[#209CF9] font-medium;
+    @apply bg-[#0A2338] border border-[#209CF9] rounded-[20px] sm:rounded-[30px] px-3.5 sm:px-7 pt-[5px] sm:pt-2 pb-[6px] sm:pb-[9px] text-[15px] sm:text-[17px] text-[#209CF9] font-medium;
 }
 .movie-actions {
-    @apply flex items-center gap-8 mt-7 lg:mt-8;
+    @apply flex items-center gap-8 mt-7 sm:mt-8;
 }
 .trailer-btn {
-    @apply bg-[#088AF5] text-[17.5px] lg:text-xl font-medium px-10 lg:px-12 py-3 lg:py-4 rounded-[40px];
+    @apply bg-[#088AF5] text-[17.5px] sm:text-xl font-medium px-10 sm:px-12 py-3 sm:py-4 rounded-[40px] lg:hover:bg-[#0070ed] transition-all duration-200;
 }
-.favorite-btn {
-    @apply p-[13px] lg:p-4 bg-[#FFFFFF3C] rounded-[50%] flex justify-center items-center backdrop-blur-[3px];
+.add-favorite-btn {
+    @apply p-[13px] sm:p-4 bg-[#FFFFFF3C] rounded-[50%] flex justify-center items-center backdrop-blur-[3px] lg:hover:bg-[#FFFFFF4C] lg:transition-all lg:duration-200;
 }
-.favorite-btn span {
-    @apply size-[22px] lg:size-[24px];
+.add-favorite-btn span {
+    @apply size-[22px] sm:size-[24px];
+}
+/* When movie in favorite */
+.add-favorite-btn.active {
+    @apply bg-[#142E43];
+}
+.add-favorite-btn.active span {
+    @apply text-[#088AF5];
 }
 /* Movie page bottom side*/
 .movie-bottom {
-    @apply relative z-[1] w-full bg-back-color px-[15px] lg:px-16 py-7 lg:py-9;
+    @apply relative z-[1] w-full bg-back-color-2 px-[15px] sm:px-10 lg:px-16 py-7 sm:py-8 lg:py-9;
 }
 .movie-info {
-    @apply flex gap-3 lg:gap-5 mb-3 lg:text-lg;
+    @apply flex gap-3 sm:gap-5 mb-3 sm:text-lg;
 }
 .movie-age {
-    @apply px-2.5 lg:px-3 border border-[#787878] text-[15px] lg:text-[17px] font-medium;
+    @apply px-2.5 sm:px-3 border border-[#787878] text-[15px] sm:text-[17px] font-medium;
 }
 .movie-description {
-    @apply opacity-70 lg:text-lg lg:w-[60%];
+    @apply opacity-70 sm:text-lg md:w-[85%] lg:w-[60%];
 }
 .movie-additional-info li {
-    @apply mt-5 lg:mt-7 text-lg lg:text-xl font-medium;
+    @apply mt-5 sm:mt-7 text-lg sm:text-xl font-medium;
 }
 .movie-additional-info li p {
-    @apply text-[16px] lg:text-lg font-normal opacity-70 lg:mt-0.5;
+    @apply text-[16px] sm:text-lg font-normal opacity-70 sm:mt-0.5;
 }
+/* For movie trailer */
 .movie-trailer {
     @apply lg:hidden w-full !text-xl;
 }
 .movie-trailer iframe {
-    @apply w-full h-[220px] rounded-lg mt-2;
+    @apply w-full h-[240px] sm:h-[400px] md:h-[500px] rounded-lg mt-2 sm:mt-2.5;
+}
+/* Trailer large version*/
+.movie-trailer.larger {
+    @apply hidden lg:hidden w-full h-screen justify-center items-center fixed left-0 top-0 z-10 bg-[#090E17B2];
+}
+.movie-trailer.larger.active {
+    @apply lg:flex;
+}
+.movie-trailer.larger iframe {
+    @apply lg:w-[85%] xl:w-[75%] 2xl:w-[68%] lg:h-[75%] xl:h-[80%] 2xl:h-[80%] rounded-xl;
 }
