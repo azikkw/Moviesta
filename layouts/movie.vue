@@ -1,5 +1,5 @@
 <template>
-  <div class="w-full h-screen bg-back-color-2 text-white font-satoshi">
+  <div class="w-full h-screen flex flex-col bg-back-color-2">
     <slot/>
   </div>
 </template>

@@ -1,9 +1,5 @@
 <template>
   <div class="movie-page">
-    <Head>
-      <Title>Avatar: The Way of Water</Title>
-      <Meta name="description" content="Avatar: The Way of Water" />
-    </Head>
     <NuxtLink to="/" class="back-btn"><Icon name="solar:undo-left-round-broken"/></NuxtLink>
     <div class="movie-top">
       <span class="movie-rating">7.6</span>
@@ -42,6 +38,9 @@
     <div @click="closeTrailer" class="movie-trailer larger" :class="{'active': isOpened}">
       <iframe src="https://www.youtube.com/embed/d9MyW72ELq0" allowfullscreen/>
     </div>
+    <footer class="bg-back-color-2">
+      <a href="https://github.com/azikkw/Moviesta" target="_blank">2024 <Icon name="mdi:github" size="25px"/> azikkw</a>
+    </footer>
   </div>
 </template>
 
@@ -56,6 +55,12 @@
 
   definePageMeta({
     layout: 'movie'
+  });
+  useHead({
+    title: 'Avatar: The Way of Water',
+    meta: [
+      { name: 'description', content: 'Avatar: The Way of Water' }
+    ]
   });
 
   // Trailer window options

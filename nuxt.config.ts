@@ -8,7 +8,12 @@ export default defineNuxtConfig({
     host: '0.0.0.0',
     port: 3000
   },
-  modules: ["@nuxtjs/tailwindcss", "@nuxt/icon", "@nuxt/image"],
+  modules: [
+    "@nuxtjs/tailwindcss",
+    "@nuxt/icon",
+    "@nuxt/image",
+    "nuxt-swiper"
+  ],
   app: {
     head: {
       title: "Moviesta",

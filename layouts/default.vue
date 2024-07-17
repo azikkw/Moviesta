@@ -1,5 +1,5 @@
 <template>
-  <div class="w-full bg-back-color-1 text-white font-satoshi">
+  <div class="w-full bg-back-color-1">
     <header>
       <picture>
         <source :srcset="'/logo.png'" media="(min-width: 640px)">
@@ -32,7 +32,7 @@
         </ul>
       </div>
     </header>
-    <div class="w-full h-screen mt-20">
+    <div class="w-full min-h-screen mt-20">
       <slot/>
     </div>
     <footer>

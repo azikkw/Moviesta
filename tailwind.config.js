@@ -21,6 +21,19 @@ export default {
       boxShadow: {
         'custom': '0 0 50px rgba(0, 0, 0, 0.5)',
         'header': '2px 0 10px rgba(0, 0, 0, 0.2)',
+        'poster-pc': '0 -150px 400px 320px rgba(10, 16, 27, 100)',
+        'poster-phone': '10px -5px 10px #0A101B,\n' +
+            '                -10px -5px 10px #0A101B,\n' +
+            '                10px -15px 25px #0A101B,\n' +
+            '                -10px -15px 25px #0A101B,\n' +
+            '                10px -25px 50px #0A101B,\n' +
+            '                -10px -25px 50px #0A101B,\n' +
+            '                10px -35px 80px #0A101B,\n' +
+            '                -10px -35px 80px #0A101B,\n' +
+            '                10px -50px 100px #0A101B,\n' +
+            '                -10px -50px 100px #0A101B, \n' +
+            '                10px -80px 150px #0A101B, \n' +
+            '                -10px -80px 150px #0A101B'
       },
     }
   },
