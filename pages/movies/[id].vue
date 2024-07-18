@@ -2,12 +2,10 @@
   <div class="movie-page">
     <NuxtLink to="/" class="back-btn"><Icon name="solar:undo-left-round-broken"/></NuxtLink>
     <div class="movie-top">
-      <span class="movie-rating">7.6</span>
-      <p class="movie-title">Avatar: The Way of Water</p>
+      <span class="movie-rating">{{parseFloat(movie.vote_average.toFixed(1))}}</span>
+      <p class="movie-title">{{movie.title}}</p>
       <ul class="movie-genres">
-        <li>Science Fiction</li>
-        <li>Adventure</li>
-        <li>Action</li>
+        <li v-for="genre in movie.genres">{{genre.name}}</li>
       </ul>
       <div class="movie-actions">
         <button @click="openTrailer" class="trailer-btn" aria-label="Watch trailer btn">Watch Trailer</button>
@@ -17,26 +15,26 @@
     </div>
     <div class="movie-bottom">
       <ul class="movie-info">
-        <li class="font-medium">2022</li>
-        <li class="movie-age">13+</li>
-        <li>2h 15m</li>
+        <li class="font-medium">{{movie.release_date.slice(0, 4)}}</li>
+        <li class="movie-age">{{getCertification}}</li>
+        <li>{{Math.floor(movie.runtime / 60)}}h {{movie.runtime % 60}}m</li>
       </ul>
-      <p class="movie-description">Set more than a decade after the events of the first film, learn the story of the Sully family (Jake, Neytiri, and their kids), the trouble that follows them, the lengths they go to keep each other safe, the battles they fight to stay alive, and the tragedies they endure.</p>
+      <p class="movie-description">{{movie.overview}}</p>
       <ul class="movie-additional-info">
         <li ref="phoneTrailer" class="movie-trailer">
           Movie Trailer
-          <iframe src="https://www.youtube.com/embed/d9MyW72ELq0" allowfullscreen/>
+          <iframe :src="`https://www.youtube.com/embed/${getTrailer}`" allowfullscreen/>
         </li>
-        <li>Country<p>United States of America</p></li>
+        <li>Country<p>{{movie.production_countries[0].name}}</p></li>
       </ul>
     </div>
     <picture class="movie-poster">
-      <source :srcset="'https://image.tmdb.org/t/p/original/8rpDcsfLJypbO6vREc0547VKqEv.jpg'" media="(min-width: 1024px)">
-      <source :srcset="'https://image.tmdb.org/t/p/original/t6HIqrRAclMCA60NsSmeqe9RmNV.jpg'" media="(max-width: 1023px)">
-      <NuxtImg class="movie-poster" preload :src="'https://image.tmdb.org/t/p/original/t6HIqrRAclMCA60NsSmeqe9RmNV.jpg'" alt="poster"/>
+      <source :srcset="`https://image.tmdb.org/t/p/original${movie.backdrop_path}`" media="(min-width: 1024px)">
+      <source :srcset="`https://image.tmdb.org/t/p/original${movie.poster_path}`" media="(max-width: 1023px)">
+      <NuxtImg class="movie-poster" preload :src="`https://image.tmdb.org/t/p/original${movie.poster_path}`" alt="poster"/>
     </picture>
     <div @click="closeTrailer" class="movie-trailer larger" :class="{'active': isOpened}">
-      <iframe src="https://www.youtube.com/embed/d9MyW72ELq0" allowfullscreen/>
+      <iframe :src="`https://www.youtube.com/embed/${getTrailer}`" allowfullscreen/>
     </div>
     <footer class="bg-back-color-2">
       <a href="https://github.com/azikkw/Moviesta" target="_blank">2024 <Icon name="mdi:github" size="25px"/> azikkw</a>
@@ -53,6 +51,8 @@
 
   const inFavorites = ref(false);
 
+  const { id } = useRoute().params;
+
   definePageMeta({
     layout: 'movie'
   });
@@ -61,6 +61,26 @@
     meta: [
       { name: 'description', content: 'Avatar: The Way of Water' }
     ]
+  });
+  onMounted(() => {
+    // Accept disabled scrolling from search
+    document.body.style.overflow = '';
+  })
+
+  // Fetching movie detail
+  const { data: movie } = await useFetch(`/api/movie/${id}`);
+
+  if(!movie.value) {
+    throw createError({statusCode: 404, statusMessage: 'Page not found', fatal: true});
+  }
+
+  // Getting certification for movie
+  const getCertification = computed(() => {
+    return movie.value.releases.countries.find(release => release.iso_3166_1 === 'US').certification;
+  });
+  // Getting trailer key for YouTube iframe
+  const getTrailer = computed(() => {
+    return movie.value.videos.results.findLast(video => video.type === 'Trailer').key;
   });
 
   // Trailer window options

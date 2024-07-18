@@ -2,7 +2,7 @@
   <div class="favorites-page">
     <p class="title">Favorites</p>
     <div class="movies-list">
-      <NuxtLink to="/movies/5" class="movie-card">
+      <NuxtLink to="/movies/76600" class="movie-card">
         <picture class="h-full flex items-center">
           <source :srcset="'https://image.tmdb.org/t/p/w780/8rpDcsfLJypbO6vREc0547VKqEv.jpg'" media="(min-width: 640px)">
           <source :srcset="'https://image.tmdb.org/t/p/original/t6HIqrRAclMCA60NsSmeqe9RmNV.jpg'" media="(max-width: 639px)">

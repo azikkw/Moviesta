@@ -37,5 +37,8 @@ export default defineNuxtConfig({
   },
   css: [
     '~/assets/css/tailwind.css',
-  ]
+  ],
+  runtimeConfig: {
+    movieDbKey: process.env.MOVIEDB_API_KEY,
+  },
 })

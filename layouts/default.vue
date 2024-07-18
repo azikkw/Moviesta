@@ -14,20 +14,13 @@
       </nav>
       <div class="search-window" :class="{'active': searchOpened}">
         <div class="search">
-          <input ref="searchInput" type="text" placeholder="Search Movie...." class="search-input"/>
+          <input ref="searchInput" v-model="searchQuery" @keyup="search" type="text" placeholder="Search Movie...." class="search-input"/>
           <Icon class="search-icon" @click="openSearchWindow" name="solar:magnifer-linear"/>
           <p class="close-btn" @click="closeSearchWindow">Cancel</p>
         </div>
-        <ul class="result" @scroll="onStartScroll">
-          <li>
-            <NuxtLink to="/movies/5">
-              <NuxtImg loading="lazy" :src="'https://image.tmdb.org/t/p/original/t6HIqrRAclMCA60NsSmeqe9RmNV.jpg'" alt="Search Image" />
-              <div class="result-movie-info">
-                <p>Avatar: The Way of Water</p>
-                <p>2022</p>
-              </div>
-              <p class="result-movie-rating">7.6</p>
-            </NuxtLink>
+        <ul class="result" @scroll="onStartScroll" :style="{ display: findMovies.length > 0 ? 'block' : 'none' }">
+          <li v-for="(movie, index) in findMovies" :key="index">
+            <SearchCard :movie="movie" />
           </li>
         </ul>
       </div>
@@ -46,7 +39,22 @@
   import { ref } from 'vue';
 
   const searchInput = ref(null);
+  const searchQuery = ref('');
   const searchOpened = ref(false);
+  const findMovies = ref([]);
+
+  // Search movies function
+  const search = async () => {
+    if(searchQuery.value.length > 0) {
+      const query = searchQuery.value.trim().toLowerCase();
+      setTimeout(async () => {
+        const { data: searchResult } = await useFetch(`/api/search/${query}`);
+        findMovies.value = searchResult.value.results;
+      }, 300)
+    } else {
+      findMovies.value = [];
+    }
+  }
 
   // Search window options
   const openSearchWindow = async () => {
@@ -58,6 +66,11 @@
     searchInput?.value.focus();
   }
   const closeSearchWindow = () => {
+    // Clean query and array
+    findMovies.value = [];
+    searchQuery.value = '';
+
+    // Disable search window value and overflow: hidden
     searchOpened.value = false;
     document.body.style.overflow = '';
   }

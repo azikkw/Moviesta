@@ -28,29 +28,49 @@ body::-webkit-scrollbar-thumb {
 
 /* Swiper styles */
 .swiper {
-    @apply w-full relative;
+    @apply w-full;
+}
+.home-list:hover .swp-btn {
+    @apply lg:!opacity-100;
 }
 .swiper-wrapper {
-    @apply items-end py-[15px];
+    @apply items-start lg:items-end py-2.5 lg:py-[15px];
 }
 .swiper-slide {
     @apply !w-fit !h-fit;
 }
 .swiper-wrapper .swiper-slide:first-child {
-    @apply ml-16;
+    @apply ml-[15px] lg:ml-16;
 }
 .swiper-wrapper .swiper-slide:last-child {
-    @apply mr-16;
+    @apply mr-[15px] lg:mr-16;
 }
-.trending-prev,
-.trending-next {
-    @apply hidden !text-white bg-[#0A101B66] bg-red-500 !w-[50px] !h-full absolute !bottom-0 !-mt-[115px] lg:flex items-center opacity-0 lg:hover:opacity-100 lg:transition-opacity lg:duration-200;
+/* Swiper navigation buttons style */
+.swp-btn.swiper-button-disabled {
+    @apply hidden;
 }
+.swp-btn {
+    @apply hidden lg:block w-[50px] h-[200px] bg-[#0A101B7F] absolute bottom-0 z-[2] mb-[15px] lg:opacity-0 lg:hover:opacity-100 lg:transition-opacity lg:duration-200;
+}
+.top-rated-prev,
+.popular-prev,
 .trending-prev {
-    @apply !left-0;
+    @apply left-0
 }
-.trending-next {
-    @apply !right-0;
+.top-rated-next,
+.trending-next,
+.popular-next {
+    @apply right-0;
+}
+.top-rated-prev span,
+.popular-prev span,
+.trending-prev span {
+    @apply -ml-2
+}
+.top-rated-next span,
+.popular-next span,
+.trending-next span {
+    @apply ml-0.5;
 }
 
 /* Header */
@@ -118,7 +138,7 @@ nav ul li a span {
 }
 /* Search result */
 .result {
-    @apply hidden w-full h-[calc(100%-60px)] lg:h-auto lg:max-h-[380px] overflow-y-auto lg:absolute lg:left-0 lg:top-[44px] bg-back-color-2 rounded-lg border border-[#424c61] lg:p-[15px];
+    @apply w-full h-[calc(100%-60px)] lg:h-auto lg:max-h-[380px] overflow-y-auto lg:absolute lg:left-0 lg:top-[44px] bg-back-color-2 rounded-lg border border-[#424c61] lg:p-[15px];
 }
 .search-window.active .result {
     @apply block border-none px-[15px] sm:px-16 md:px-[100px] lg:px-[15px];
@@ -155,10 +175,10 @@ footer a {
 
 /* Home Page */
 .home-page {
-    @apply w-full py-10;
+    @apply w-full overflow-x-hidden py-10;
 }
 .home-title {
-    @apply px-16 text-2xl font-medium;
+    @apply px-[15px] lg:px-16 text-xl lg:text-2xl font-medium;
 }
 /* Home page top movie poster styles */
 .top-movie {
@@ -199,17 +219,17 @@ footer a {
     @apply w-fit !px-16 lg:!px-14 xl:!px-16 !py-[13px] lg:!py-3 xl:!py-[13px] !text-[19px] sm:!text-[23px] lg:!text-lg xl:!text-[19px] lg:mt-8 xl:mt-9 order-3;
 }
 /* Home page suggestion movies lists styles */
-.trending {
-    @apply w-full flex flex-col;
+.home-list {
+    @apply w-full flex flex-col relative mb-8;
 }
 .home-card {
-    @apply flex relative w-[340px] h-[200px] lg:hover:scale-110 lg:hover:z-10 lg:hover:shadow-custom lg:transition-all lg:duration-300;;
+    @apply flex flex-col relative w-[150px] sm:w-[210px] lg:w-[340px] h-auto lg:h-[200px] lg:hover:-translate-y-2 lg:transition-all lg:duration-300;
 }
 .home-card-name {
-    @apply w-full text-end text-lg font-medium absolute right-0 bottom-0 sm:backdrop-blur-[1.5px] sm:px-4 sm:pb-2 sm:pt-1;
+    @apply w-full lg:text-end text-[15px] sm:text-xl lg:text-lg leading-[1.4] font-medium lg:absolute lg:right-0 lg:bottom-0 lg:backdrop-blur-[1.5px] lg:px-4 lg:pb-2 pt-1;
 }
 .home-card-rating {
-    @apply absolute left-2.5 top-3 px-2.5 text-[15px] font-bold text-white bg-green-500 leading-[1.45];
+    @apply absolute left-2 sm:left-2.5 top-2 sm:top-2.5 px-[5px] sm:px-2.5 text-[14px] sm:text-[17px] lg:text-[15px] font-bold text-white bg-green-500 leading-[1.45];
 }
 
 /* Favorites Page */
@@ -223,7 +243,7 @@ footer a {
     @apply grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 sm:gap-x-2.5 gap-y-2.5 lg:gap-y-3.5;
 }
 .movie-card {
-    @apply h-[115px] sm:h-auto relative flex items-center bg-back-color-2 gap-4 sm:gap-0 rounded-[7px] sm:rounded-[2px] px-1 sm:p-0 cursor-pointer lg:hover:scale-110 lg:hover:z-10 lg:hover:shadow-custom lg:transition-all lg:duration-300;
+    @apply h-[115px] sm:h-auto relative flex items-center bg-back-color-2 gap-4 sm:gap-0 rounded-[7px] sm:rounded-[2px] px-1 sm:p-0 lg:hover:-translate-y-2 lg:transition-all lg:duration-300;
 }
 .movie-card-img {
     @apply w-auto sm:w-full h-[94%] sm:h-auto rounded-l-[4px] sm:rounded-[1px];

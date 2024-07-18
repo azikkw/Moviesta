@@ -1,111 +1,69 @@
 <template>
-  <div class="top-movie">
-    <div class="top-movie-left"></div>
-    <picture class="top-movie-poster">
-      <source :srcset="'https://image.tmdb.org/t/p/original/dn3gbDpXPSwC6saMJOHkCiFA9jn.jpg'" media="(min-width: 1024px)">
-      <source :srcset="'https://image.tmdb.org/t/p/original/dwxWNJ9oDLqNPbA0884h5J7mfqy.jpg'" media="(max-width: 1023px)">
-      <NuxtImg class="movie-card-img" loading="lazy" :src="'https://image.tmdb.org/t/p/original/dwxWNJ9oDLqNPbA0884h5J7mfqy.jpg'" alt="Favorite movie" media="(max-width: 1023px)" />
-    </picture>
-    <div class="top-movie-info">
-      <p class="top-movie-title">Descendants: The Rise of Red</p>
-      <p class="top-movie-desc">After the Queen of Hearts incites a coup on Auradon, her rebellious daughter Red and Cinderella's perfectionist daughter Chloe join forces and travel back in time to try to undo the traumatic event that set Red's mother down her villainous path.</p>
-      <div class="top-movie-add-info"><p class="top-movie-rating">7.3</p><p class="top-movie-year">2024</p></div>
-      <NuxtLink to="/movies/5" class="more-btn" aria-label="Watch trailer btn">More Info</NuxtLink>
-    </div>
-  </div>
+  <TopPoster :movie="trending.results[getRandomTrending]" />
   <div class="home-page relative z-[5]">
-    <div class="trending">
+    <div class="home-list">
+      <p class="home-title">Top Rated</p>
+      <button class="top-rated-prev swp-btn">
+        <Icon name="solar:alt-arrow-left-line-duotone" size="50" />
+      </button>
+      <button class="top-rated-next swp-btn">
+        <Icon name="solar:alt-arrow-right-line-duotone" size="50" />
+      </button>
+      <Swiper
+          ref="topRatedSwiper"
+          :slides-per-view="'auto'"
+          :space-between="10"
+          :navigation="{ nextEl: '.top-rated-next', prevEl: '.top-rated-prev' }"
+          :free-mode="true"
+          @swiper="onTopRatedSwiper"
+          class="top-rated-swiper"
+      >
+        <SwiperSlide v-for="(movie, index) in topRated.results" :key="index">
+          <HomeCard :movie="movie" />
+        </SwiperSlide>
+      </Swiper>
+    </div>
+    <div class="home-list">
+      <p class="home-title">Popular movies</p>
+      <button class="popular-prev swp-btn">
+        <Icon name="solar:alt-arrow-left-line-duotone" size="50" />
+      </button>
+      <button class="popular-next swp-btn">
+        <Icon name="solar:alt-arrow-right-line-duotone" size="50" />
+      </button>
+      <Swiper
+          ref="popularSwiper"
+          :slides-per-view="'auto'"
+          :space-between="10"
+          :navigation="{ nextEl: '.popular-next', prevEl: '.popular-prev' }"
+          :free-mode="true"
+          @swiper="onPopularSwiper"
+          class="popular-swiper"
+      >
+        <SwiperSlide v-for="(movie, index) in popular.results" :key="index">
+          <HomeCard :movie="movie" />
+        </SwiperSlide>
+      </Swiper>
+    </div>
+    <div class="home-list">
       <p class="home-title">Trending</p>
-      <div class="trending-prev">
-      </div>
-      <div class="trending-next">
-      </div>
+      <button class="trending-prev swp-btn">
+        <Icon name="solar:alt-arrow-left-line-duotone" size="50" />
+      </button>
+      <button class="trending-next swp-btn">
+        <Icon name="solar:alt-arrow-right-line-duotone" size="50" />
+      </button>
       <Swiper
         ref="trendingSwiper"
         :slides-per-view="'auto'"
-        :space-between="15"
+        :space-between="10"
         :navigation="{ nextEl: '.trending-next', prevEl: '.trending-prev' }"
         :free-mode="true"
         @swiper="onTrendingSwiper"
         class="trending-swiper"
       >
-        <SwiperSlide>
-          <NuxtLink to="/movies/5" class="home-card">
-            <picture class="w-full h-full">
-              <source :srcset="'https://image.tmdb.org/t/p/w780/8rpDcsfLJypbO6vREc0547VKqEv.jpg'" media="(min-width: 640px)">
-              <source :srcset="'https://image.tmdb.org/t/p/original/t6HIqrRAclMCA60NsSmeqe9RmNV.jpg'" media="(max-width: 639px)">
-              <NuxtImg class="w-full h-full object-cover rounded-[1px]" loading="lazy" :src="'https://image.tmdb.org/t/p/w780/t6HIqrRAclMCA60NsSmeqe9RmNV.jpg'" alt="Favorite movie" media="(max-width: 1023px)" />
-            </picture>
-            <div class="home-card-info">
-              <p class="home-card-name">Avatar: The Way of Water</p>
-              <p class="home-card-rating">7.6</p>
-            </div>
-          </NuxtLink>
-        </SwiperSlide>
-        <SwiperSlide>
-          <NuxtLink to="/movies/5" class="home-card">
-            <picture class="w-full h-full">
-              <source :srcset="'https://image.tmdb.org/t/p/w780/8rpDcsfLJypbO6vREc0547VKqEv.jpg'" media="(min-width: 640px)">
-              <source :srcset="'https://image.tmdb.org/t/p/original/t6HIqrRAclMCA60NsSmeqe9RmNV.jpg'" media="(max-width: 639px)">
-              <NuxtImg class="w-full h-full object-cover rounded-[1px]" loading="lazy" :src="'https://image.tmdb.org/t/p/w780/t6HIqrRAclMCA60NsSmeqe9RmNV.jpg'" alt="Favorite movie" media="(max-width: 1023px)" />
-            </picture>
-            <div class="home-card-info">
-              <p class="home-card-name">Avatar: The Way of Water</p>
-              <p class="home-card-rating">7.6</p>
-            </div>
-          </NuxtLink>
-        </SwiperSlide>
-        <SwiperSlide>
-          <NuxtLink to="/movies/5" class="home-card">
-            <picture class="w-full h-full">
-              <source :srcset="'https://image.tmdb.org/t/p/w780/8rpDcsfLJypbO6vREc0547VKqEv.jpg'" media="(min-width: 640px)">
-              <source :srcset="'https://image.tmdb.org/t/p/original/t6HIqrRAclMCA60NsSmeqe9RmNV.jpg'" media="(max-width: 639px)">
-              <NuxtImg class="w-full h-full object-cover rounded-[1px]" loading="lazy" :src="'https://image.tmdb.org/t/p/w780/t6HIqrRAclMCA60NsSmeqe9RmNV.jpg'" alt="Favorite movie" media="(max-width: 1023px)" />
-            </picture>
-            <div class="home-card-info">
-              <p class="home-card-name">Avatar: The Way of Water</p>
-              <p class="home-card-rating">7.6</p>
-            </div>
-          </NuxtLink>
-        </SwiperSlide>
-        <SwiperSlide>
-          <NuxtLink to="/movies/5" class="home-card">
-            <picture class="w-full h-full">
-              <source :srcset="'https://image.tmdb.org/t/p/w780/8rpDcsfLJypbO6vREc0547VKqEv.jpg'" media="(min-width: 640px)">
-              <source :srcset="'https://image.tmdb.org/t/p/original/t6HIqrRAclMCA60NsSmeqe9RmNV.jpg'" media="(max-width: 639px)">
-              <NuxtImg class="w-full h-full object-cover rounded-[1px]" loading="lazy" :src="'https://image.tmdb.org/t/p/w780/t6HIqrRAclMCA60NsSmeqe9RmNV.jpg'" alt="Favorite movie" media="(max-width: 1023px)" />
-            </picture>
-            <div class="home-card-info">
-              <p class="home-card-name">Avatar: The Way of Water</p>
-              <p class="home-card-rating">7.6</p>
-            </div>
-          </NuxtLink>
-        </SwiperSlide>
-        <SwiperSlide>
-          <NuxtLink to="/movies/5" class="home-card">
-            <picture class="w-full h-full">
-              <source :srcset="'https://image.tmdb.org/t/p/w780/8rpDcsfLJypbO6vREc0547VKqEv.jpg'" media="(min-width: 640px)">
-              <source :srcset="'https://image.tmdb.org/t/p/original/t6HIqrRAclMCA60NsSmeqe9RmNV.jpg'" media="(max-width: 639px)">
-              <NuxtImg class="w-full h-full object-cover rounded-[1px]" loading="lazy" :src="'https://image.tmdb.org/t/p/w780/t6HIqrRAclMCA60NsSmeqe9RmNV.jpg'" alt="Favorite movie" media="(max-width: 1023px)" />
-            </picture>
-            <div class="home-card-info">
-              <p class="home-card-name">Avatar: The Way of Water</p>
-              <p class="home-card-rating">7.6</p>
-            </div>
-          </NuxtLink>
-        </SwiperSlide>
-        <SwiperSlide>
-          <NuxtLink to="/movies/5" class="home-card">
-            <picture class="w-full h-full">
-              <source :srcset="'https://image.tmdb.org/t/p/w780/8rpDcsfLJypbO6vREc0547VKqEv.jpg'" media="(min-width: 640px)">
-              <source :srcset="'https://image.tmdb.org/t/p/original/t6HIqrRAclMCA60NsSmeqe9RmNV.jpg'" media="(max-width: 639px)">
-              <NuxtImg class="w-full h-full object-cover rounded-[1px]" loading="lazy" :src="'https://image.tmdb.org/t/p/w780/t6HIqrRAclMCA60NsSmeqe9RmNV.jpg'" alt="Favorite movie" media="(max-width: 1023px)" />
-            </picture>
-            <div class="home-card-info">
-              <p class="home-card-name">Avatar: The Way of Water</p>
-              <p class="home-card-rating">7.6</p>
-            </div>
-          </NuxtLink>
+        <SwiperSlide v-for="(movie, index) in trending.results" :key="index">
+          <HomeCard :movie="movie" />
         </SwiperSlide>
       </Swiper>
     </div>
@@ -121,9 +79,28 @@
   // Activating swiper modules
   SwiperCore.use([Navigation, FreeMode]);
 
+  // Fetching movie lists
+  const { data: topRated } = await useFetch(`/api/movie/top_rated`);
+  const { data: popular } = await useFetch(`/api/movie/popular`);
+  const { data: trending } = await useFetch(`/api/trending/movie`);
+
+  // Get movie for top poster from trending
+  const getRandomTrending = computed(() => {
+    if(trending.value)
+      return Math.floor(Math.random() * (trending.value.results.length + 1))
+  });
+
   // Swiper configuration
+  const topRatedSwiper = ref(null);
+  const popularSwiper = ref(null);
   const trendingSwiper = ref(null);
 
+  const onTopRatedSwiper = (swiper) => {
+    topRatedSwiper.value = swiper;
+  };
+  const onPopularSwiper = (swiper) => {
+    popularSwiper.value = swiper;
+  };
   const onTrendingSwiper = (swiper) => {
     trendingSwiper.value = swiper;
   };
