@@ -24,6 +24,7 @@
           </li>
         </ul>
       </div>
+      <button class="logout" @click="logOut" aria-label="Logout btn"><Icon name="solar:logout-2-broken"/></button>
     </header>
     <div class="w-full min-h-screen mt-20">
       <slot/>
@@ -37,11 +38,26 @@
 <script setup>
 
   import { ref } from 'vue';
+  import { signOut } from "firebase/auth";
+  import { useNuxtApp } from '#app';
 
   const searchInput = ref(null);
   const searchQuery = ref('');
   const searchOpened = ref(false);
   const findMovies = ref([]);
+
+  const router = useRouter();
+  const { $auth } = useNuxtApp();
+
+  // Log out from account
+  const logOut = async () => {
+    try {
+      await signOut($auth)
+        .then(() => router.push('/'));
+    } catch(error) {
+      console.error('Error signing out', error);
+    }
+  }
 
   // Search movies function
   const search = async () => {

@@ -14,6 +14,9 @@ export default defineNuxtConfig({
     "@nuxt/image",
     "nuxt-swiper"
   ],
+  plugins: [
+    "~/plugins/firebase.js"
+  ],
   app: {
     head: {
       title: "Moviesta",

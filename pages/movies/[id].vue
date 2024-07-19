@@ -1,6 +1,6 @@
 <template>
   <div class="movie-page">
-    <NuxtLink to="/" class="back-btn"><Icon name="solar:undo-left-round-broken"/></NuxtLink>
+    <button @click="router.back()" class="back-btn" aria-label="Back btn"><Icon name="solar:undo-left-round-broken"/></button>
     <div class="movie-top">
       <span class="movie-rating">{{parseFloat(movie.vote_average.toFixed(1))}}</span>
       <p class="movie-title">{{movie.title}}</p>
@@ -9,7 +9,7 @@
       </ul>
       <div class="movie-actions">
         <button @click="openTrailer" class="trailer-btn" aria-label="Watch trailer btn">Watch Trailer</button>
-        <button @click="checkForFavorites" class="add-favorite-btn" :class="{'active': inFavorites}" aria-label="Add favorite btn"><Icon name="solar:bookmark-bold"/></button>
+        <button @click="toggleFavorite" class="add-favorite-btn" :class="{'active': inFavorites}" aria-label="Add favorite btn"><Icon name="solar:bookmark-bold"/></button>
       </div>
       <div class="poster-shadow"></div>
     </div>
@@ -36,15 +36,16 @@
     <div @click="closeTrailer" class="movie-trailer larger" :class="{'active': isOpened}">
       <iframe :src="`https://www.youtube.com/embed/${getTrailer}`" allowfullscreen/>
     </div>
-    <footer class="bg-back-color-2">
-      <a href="https://github.com/azikkw/Moviesta" target="_blank">2024 <Icon name="mdi:github" size="25px"/> azikkw</a>
-    </footer>
   </div>
 </template>
 
 <script setup>
 
   import { ref } from 'vue';
+  import { useRouter } from 'vue-router';
+  import { addToFavorites } from "~/services/favorites.js";
+
+  const router = useRouter();
 
   const phoneTrailer = ref(null);
   const isOpened = ref(false);
@@ -54,7 +55,7 @@
   const { id } = useRoute().params;
 
   definePageMeta({
-    layout: 'movie'
+    layout: 'second',
   });
   useHead({
     title: 'Avatar: The Way of Water',
@@ -73,6 +74,11 @@
   if(!movie.value) {
     throw createError({statusCode: 404, statusMessage: 'Page not found', fatal: true});
   }
+
+  // Favorite options
+  const toggleFavorite = async () => {
+    await addToFavorites(id);
+  };
 
   // Getting certification for movie
   const getCertification = computed(() => {

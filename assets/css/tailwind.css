@@ -26,6 +26,17 @@ body::-webkit-scrollbar-thumb {
     @apply lg:bg-[#088AF5] lg:rounded-[3px];
 }
 
+/* Log out btn */
+.logout {
+    @apply flex items-center ml-7 sm:ml-8;
+}
+.logout span {
+    @apply size-[26px] sm:size-7 lg:size-[21px] opacity-80 lg:opacity-100;
+}
+.logout:hover span {
+    @apply text-[#209CF9];
+}
+
 /* Swiper styles */
 .swiper {
     @apply w-full;
@@ -73,15 +84,54 @@ body::-webkit-scrollbar-thumb {
     @apply ml-0.5;
 }
 
+/* Auth */
+.auth-back {
+    @apply relative w-full h-screen bg-[url('/public/welcome.jpg')] bg-cover bg-bottom;
+}
+.auth {
+    @apply relative w-full h-screen flex flex-col justify-center lg:justify-end items-center z-[1];
+}
+.for-shadow {
+    @apply w-full h-[300px] sm:h-[400px] lg:h-[210px] bg-back-color-2 absolute left-0 bottom-0 z-[0];
+    /* Box shadows for smooth transition between poster and info side */
+    box-shadow: 0 50px 200px #090E17,
+        0 -5px 200px 100px #090E17,
+        0 -15px 120px 100px #090E17;
+}
+.auth-form {
+    @apply w-full sm:w-fit mb-10 lg:mb-[55px] flex flex-col px-7 lg:px-0;
+}
+.auth-title {
+    @apply text-[22px] sm:text-2xl lg:text-xl font-medium mb-2.5 sm:mb-3.5 lg:mb-2.5 mt-[200px] lg:mt-0;
+}
+.welcome {
+    @apply h-[30px] sm:h-[35px] lg:h-[26px] mb-11 sm:mb-[50px] lg:mb-11;
+}
+.auth-form input {
+    @apply w-full sm:w-[420px] lg:w-[310px] h-[48px] sm:h-[52px] lg:h-[42px] rounded-lg border border-[#424c61] bg-transparent px-[20px] text-[16px] sm:text-lg lg:text-[15px] mb-[9px] focus:outline-none focus:border-[#209CF9];
+}
+.auth-form button {
+    @apply h-[52px] sm:h-[60px] lg:h-[48px] bg-[#088AF5] rounded-lg mt-3 text-[19px] lg:text-[17.5px] font-medium lg:hover:bg-[#0070ed] transition-all duration-200;
+}
+.error-message {
+    @apply text-[15px] sm:text-[16px] lg:text-[14.5px] font-medium text-red-500;
+}
+.link-to {
+    @apply flex gap-2 lg:mb-10 sm:text-lg lg:text-[15px];
+}
+.link-to:hover p {
+    @apply underline;
+}
+
 /* Header */
 header {
     @apply w-full h-20 fixed left-0 top-0 z-20 shadow-header flex items-center bg-back-color-2 px-[15px] sm:px-9 lg:px-16;
 }
 .logo {
-    @apply w-auto h-[32px] sm:h-[23px] lg:h-[19px] m-0 sm:mr-20;
+    @apply w-auto h-[32px] sm:h-[23px] lg:h-[19px] mr-10 sm:mr-20;
 }
 nav {
-    @apply flex-1 flex items-center justify-center sm:justify-start;
+    @apply flex-1 flex items-center justify-start;
 }
 nav ul {
     @apply flex gap-5 lg:gap-6;
@@ -371,6 +421,9 @@ footer a {
 }
 
 @media (min-width: 1600px) {
+    .error-message {
+        @apply text-[15.5px];
+    }
     header {
         @apply h-[90px];
     }
