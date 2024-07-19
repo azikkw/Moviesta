@@ -47,16 +47,11 @@
   const findMovies = ref([]);
 
   const router = useRouter();
-  const { $auth } = useNuxtApp();
 
   // Log out from account
   const logOut = async () => {
-    try {
-      await signOut($auth)
-        .then(() => router.push('/'));
-    } catch(error) {
-      console.error('Error signing out', error);
-    }
+    await logOutUser()
+      .then(() => router.push('/login'));
   }
 
   // Search movies function

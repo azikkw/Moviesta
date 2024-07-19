@@ -1,5 +1,5 @@
 <template>
-  <TopPoster :movie="trending.results[getRandomTrending]" />
+  <TopPoster v-if="trending" :movie="trending.results[getRandomTrending]" />
   <div class="home-page relative z-[5]">
     <div class="home-list">
       <p class="home-title">Top Rated</p>
@@ -78,6 +78,10 @@
 
   // Activating swiper modules
   SwiperCore.use([Navigation, FreeMode]);
+
+  definePageMeta({
+    // middleware: 'auth'
+  });
 
   // Fetching movie lists
   const { data: topRated } = await useFetch(`/api/movie/top_rated`);

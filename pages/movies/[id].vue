@@ -9,7 +9,7 @@
       </ul>
       <div class="movie-actions">
         <button @click="openTrailer" class="trailer-btn" aria-label="Watch trailer btn">Watch Trailer</button>
-        <button @click="toggleFavorite" class="add-favorite-btn" :class="{'active': inFavorites}" aria-label="Add favorite btn"><Icon name="solar:bookmark-bold"/></button>
+        <button @click="checkForFavorites" class="add-favorite-btn" :class="{'active': inFavorites}" aria-label="Add favorite btn"><Icon name="solar:bookmark-bold"/></button>
       </div>
       <div class="poster-shadow"></div>
     </div>
@@ -43,7 +43,6 @@
 
   import { ref } from 'vue';
   import { useRouter } from 'vue-router';
-  import { addToFavorites } from "~/services/favorites.js";
 
   const router = useRouter();
 
@@ -74,11 +73,6 @@
   if(!movie.value) {
     throw createError({statusCode: 404, statusMessage: 'Page not found', fatal: true});
   }
-
-  // Favorite options
-  const toggleFavorite = async () => {
-    await addToFavorites(id);
-  };
 
   // Getting certification for movie
   const getCertification = computed(() => {

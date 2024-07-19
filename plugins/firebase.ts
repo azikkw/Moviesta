@@ -1,10 +1,8 @@
-import { defineNuxtPlugin } from '#app';
-// Importing Firebase
 import { initializeApp } from "firebase/app";
-import { getAuth } from "firebase/auth";
-import { getFirestore } from "firebase/firestore";
+import { getAuth } from "@firebase/auth";
 
-export default defineNuxtPlugin(() => {
+export default defineNuxtPlugin((nuxtApp) => {
+
     // Web app's Firebase configuration
     const firebaseConfig = {
         apiKey: "AIzaSyAiYCHSu-6nMlfQ7dTzGeBC8j6mcjOOiIg",
@@ -17,13 +15,14 @@ export default defineNuxtPlugin(() => {
 
     // Initialize Firebase
     const app = initializeApp(firebaseConfig);
-    const auth = getAuth(app);
-    const firestore = getFirestore(app);
+    const auth = getAuth();
+
+    initUser();
 
     return {
         provide: {
-            auth,
-            firestore
+            auth
         }
-    };
-});
+    }
+
+})

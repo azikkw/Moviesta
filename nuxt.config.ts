@@ -12,10 +12,7 @@ export default defineNuxtConfig({
     "@nuxtjs/tailwindcss",
     "@nuxt/icon",
     "@nuxt/image",
-    "nuxt-swiper"
-  ],
-  plugins: [
-    "~/plugins/firebase.js"
+    "nuxt-swiper",
   ],
   app: {
     head: {
