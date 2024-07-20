@@ -7,7 +7,7 @@
     </picture>
     <div class="home-card-info">
       <p class="home-card-name">{{movie.title}}</p>
-      <p class="home-card-rating">{{parseFloat(movie.vote_average.toFixed(1))}}</p>
+      <Rating :rating="movie.vote_average" />
     </div>
   </NuxtLink>
 </template>

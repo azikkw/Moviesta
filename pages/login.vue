@@ -4,10 +4,10 @@
       <p class="auth-title">Log In to</p>
       <NuxtImg class="welcome" preload src="/logo.png"/>
       <form @submit.prevent="logIn" class="auth-form">
-        <input v-model="email" type="email" placeholder="Enter email...." required />
-        <input v-model="password" type="password" placeholder="Enter password...." required />
+        <input class="form-input" v-model="email" type="email" placeholder="Enter email...." required />
+        <input class="form-input" v-model="password" type="password" placeholder="Enter password...." required />
         <p v-if="errorMessage.length > 0" class="error-message">{{errorMessage}}</p>
-        <button type="submit">Log In</button>
+        <button class="form-btn" type="submit" aria-label="Submit btn">Log In</button>
       </form>
       <NuxtLink class="link-to" to="/sign-up">Don't have an account? <p class="text-[#209CF9] font-medium">Sign Up</p></NuxtLink>
     </div>
@@ -24,16 +24,22 @@
 
   const errorMessage = ref('');
 
-  const firebaseUser = useFirebaseUser();
-
   definePageMeta({
-    // middleware: 'already-logged-in',
     layout: 'second'
+  });
+  onMounted(async () => {
+    if(localStorage.getItem('user')) {
+      await router.replace('/');
+    }
   });
 
   const logIn = async () => {
-    await logInUser(email.value, password.value);
-      // .then(() => router.replace('/'));
+    try {
+      await logInUser(email.value, password.value)
+        .then(() => router.replace('/'));
+    } catch(error) {
+      errorMessage.value = defineError(error.code)
+    }
   };
 
 </script>

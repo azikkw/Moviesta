@@ -4,10 +4,10 @@
       <p class="auth-title">Sign Up to</p>
       <NuxtImg class="welcome" preload src="/logo.png"/>
       <form @submit.prevent="signUp" class="auth-form">
-        <input v-model="email" type="email" placeholder="Enter email...." required />
-        <input v-model="password" type="password" placeholder="Enter password...." required />
+        <input class="form-input" v-model="email" type="email" placeholder="Enter email...." required />
+        <input class="form-input" v-model="password" type="password" placeholder="Enter password...." required />
         <p v-if="errorMessage.length > 0" class="error-message">{{errorMessage}}</p>
-        <button type="submit">Sign Up</button>
+        <button class="form-btn" type="submit" aria-label="Submit btn">Sign Up</button>
       </form>
       <NuxtLink class="link-to" to="/login">Already have an account? <p class="text-[#209CF9] font-medium">Log In</p></NuxtLink>
     </div>
@@ -27,10 +27,19 @@
   definePageMeta({
     layout: 'second',
   });
+  onMounted(async () => {
+    if(localStorage.getItem('user')) {
+      await router.replace('/');
+    }
+  });
 
   const signUp = async () => {
-    await createUser(email.value, password.value)
+    try {
+      await createUser(email.value, password.value)
         .then(() => router.replace('/login'));
+    } catch(error) {
+      errorMessage.value = defineError(error.code)
+    }
   }
 
 </script>

@@ -5,7 +5,7 @@
       <p>{{movie.title}}</p>
       <p>{{movie.release_date.slice(0, 4)}}</p>
     </div>
-    <p class="result-movie-rating">{{parseFloat(movie.vote_average.toFixed(1))}}</p>
+    <Rating :rating="movie.vote_average" />
   </NuxtLink>
 </template>
 

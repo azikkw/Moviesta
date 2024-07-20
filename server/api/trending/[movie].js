@@ -11,6 +11,12 @@ export default defineEventHandler(async (event) => {
         }
     }
 
-    return await fetch(url, options).then(res => res.json());
+    const trendingList = await fetch(url, options).then(res => res.json());
+
+    // Getting random movie value for top poster
+    const randomIndex = Math.floor(Math.random() * trendingList.results.length);
+    const randomTrendingMovie = trendingList.results[randomIndex];
+
+    return { trendingList, randomTrendingMovie };
 
 });

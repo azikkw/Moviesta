@@ -4,12 +4,13 @@
       <picture>
         <source :srcset="'/logo.png'" media="(min-width: 640px)">
         <source :srcset="'/favicon.png'" media="(max-width: 639px)">
-        <NuxtImg preload class="logo" :src="'/favicon.png'" alt="Moviesta" />
+        <NuxtImg loading="lazy" class="logo" :src="'/favicon.png'" alt="Moviesta" />
       </picture>
       <nav>
         <ul>
           <li><NuxtLink to="/"><Icon name="solar:home-angle-broken"/> <p>Home</p></NuxtLink></li>
           <li><NuxtLink to="/favorites"><Icon name="solar:bookmark-linear"/> <p>Favorites</p></NuxtLink></li>
+          <li><NuxtLink to="/my-movies"><Icon name="solar:folder-open-linear"/> <p>My Movies</p></NuxtLink></li>
         </ul>
       </nav>
       <div class="search-window" :class="{'active': searchOpened}">
@@ -38,8 +39,6 @@
 <script setup>
 
   import { ref } from 'vue';
-  import { signOut } from "firebase/auth";
-  import { useNuxtApp } from '#app';
 
   const searchInput = ref(null);
   const searchQuery = ref('');
@@ -48,10 +47,16 @@
 
   const router = useRouter();
 
+  onMounted(async () => {
+    if(!localStorage.getItem('user')) {
+      await router.replace('/login');
+    }
+  });
+
   // Log out from account
   const logOut = async () => {
     await logOutUser()
-      .then(() => router.push('/login'));
+      .then(() => router.replace('/login'));
   }
 
   // Search movies function

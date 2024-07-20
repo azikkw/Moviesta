@@ -26,6 +26,18 @@ body::-webkit-scrollbar-thumb {
     @apply lg:bg-[#088AF5] lg:rounded-[3px];
 }
 
+/* Form input, textarea, button styles */
+.form-input,
+.form-textarea {
+    @apply w-full sm:w-[420px] lg:w-[310px] h-[48px] sm:h-[52px] lg:h-[42px] rounded-lg border border-[#424c61] bg-transparent px-[20px] text-[16px] sm:text-lg lg:text-[15px] mb-[9px] focus:outline-none focus:border-[#209CF9];
+}
+.form-textarea {
+    @apply h-[180px] sm:h-[200px] lg:h-[90px] py-4 lg:py-2;
+}
+.form-btn {
+    @apply w-full sm:w-[420px] lg:w-[310px] h-[52px] sm:h-[60px] lg:h-[48px] bg-[#088AF5] rounded-lg mt-3 text-[19px] lg:text-[17.5px] font-medium hover:bg-[#0070ed] transition-all duration-200;
+}
+
 /* Log out btn */
 .logout {
     @apply flex items-center ml-7 sm:ml-8;
@@ -35,6 +47,11 @@ body::-webkit-scrollbar-thumb {
 }
 .logout:hover span {
     @apply text-[#209CF9];
+}
+
+/* Back button */
+.back-btn {
+    @apply absolute left-[15px] sm:left-10 lg:left-16 top-7 sm:top-12 z-[2] w-[38px] sm:w-[50px] lg:w-[38px] h-[38px] sm:h-[50px] lg:h-[38px] bg-[#FFFFFF3C] rounded-[50%] flex justify-center items-center backdrop-blur-[3px] lg:hover:bg-[#FFFFFF4C] transition-all duration-200;
 }
 
 /* Swiper styles */
@@ -107,12 +124,6 @@ body::-webkit-scrollbar-thumb {
 .welcome {
     @apply h-[30px] sm:h-[35px] lg:h-[26px] mb-11 sm:mb-[50px] lg:mb-11;
 }
-.auth-form input {
-    @apply w-full sm:w-[420px] lg:w-[310px] h-[48px] sm:h-[52px] lg:h-[42px] rounded-lg border border-[#424c61] bg-transparent px-[20px] text-[16px] sm:text-lg lg:text-[15px] mb-[9px] focus:outline-none focus:border-[#209CF9];
-}
-.auth-form button {
-    @apply h-[52px] sm:h-[60px] lg:h-[48px] bg-[#088AF5] rounded-lg mt-3 text-[19px] lg:text-[17.5px] font-medium lg:hover:bg-[#0070ed] transition-all duration-200;
-}
 .error-message {
     @apply text-[15px] sm:text-[16px] lg:text-[14.5px] font-medium text-red-500;
 }
@@ -130,6 +141,7 @@ header {
 .logo {
     @apply w-auto h-[32px] sm:h-[23px] lg:h-[19px] mr-10 sm:mr-20;
 }
+/* Navigation */
 nav {
     @apply flex-1 flex items-center justify-start;
 }
@@ -140,7 +152,7 @@ nav ul li a {
     @apply flex items-center gap-2 opacity-65 lg:opacity-80 lg:hover:opacity-100 transition-opacity duration-200;
 }
 nav ul li a p {
-    @apply hidden md:block md:text-lg lg:text-[16px];
+    @apply hidden xl:block md:text-lg lg:text-[16px];
 }
 nav ul li a span {
     @apply size-[26px] sm:size-7 lg:size-5 lg:mb-0.5;
@@ -211,9 +223,6 @@ nav ul li a span {
 .result-movie-info p:last-child {
     @apply opacity-70 sm:text-[17px] lg:text-[16px];
 }
-.result-movie-rating {
-    @apply text-[17px] sm:text-xl lg:text-[16px] font-medium text-green-500 ml-5;
-}
 
 /* Footer */
 footer {
@@ -278,12 +287,9 @@ footer a {
 .home-card-name {
     @apply w-full lg:text-end text-[15px] sm:text-xl lg:text-lg leading-[1.4] font-medium lg:absolute lg:right-0 lg:bottom-0 lg:backdrop-blur-[1.5px] lg:px-4 lg:pb-2 pt-1;
 }
-.home-card-rating {
-    @apply absolute left-2 sm:left-2.5 top-2 sm:top-2.5 px-[5px] sm:px-2.5 text-[14px] sm:text-[17px] lg:text-[15px] font-bold text-white bg-green-500 leading-[1.45];
-}
 
-/* Favorites Page */
-.favorites-page {
+/* Collection Pages */
+.collection-page {
     @apply h-full px-[15px] sm:px-9 lg:px-16 pt-5 pb-10 sm:py-10;
 }
 .title {
@@ -292,11 +298,13 @@ footer a {
 .movies-list {
     @apply grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 sm:gap-x-2.5 gap-y-2.5 lg:gap-y-3.5;
 }
+
+/* Movie card styling */
 .movie-card {
-    @apply h-[115px] sm:h-auto relative flex items-center bg-back-color-2 gap-4 sm:gap-0 rounded-[7px] sm:rounded-[2px] px-1 sm:p-0 lg:hover:-translate-y-2 lg:transition-all lg:duration-300;
+    @apply h-[115px] sm:h-auto sm:max-h-[230px] relative flex items-center justify-start bg-back-color-2 gap-4 sm:gap-0 rounded-[7px] sm:rounded-[2px] px-1 sm:p-0 lg:hover:-translate-y-2 lg:transition-all lg:duration-300;
 }
 .movie-card-img {
-    @apply w-auto sm:w-full h-[94%] sm:h-auto rounded-l-[4px] sm:rounded-[1px];
+    @apply w-[75px] sm:w-full h-[94%] sm:h-full rounded-l-[4px] sm:rounded-[1px] object-cover;
 }
 .movie-card-info {
     @apply flex-1 overflow-hidden;
@@ -317,13 +325,17 @@ footer a {
     @apply sm:hidden mr-3 size-[22px] opacity-40;
 }
 
+/* Create movie button */
+.create-movie-btn {
+    @apply min-h-[100px] flex justify-center items-center bg-[#0D1421] rounded-lg sm:rounded-[2px] text-xl sm:text-[23px] font-medium text-[#209CF9FF] lg:text-[#209CF9B2] lg:hover:text-[#209CF9FF];
+}
+.create-movie-form {
+    @apply w-full lg:w-fit sm:h-screen lg:h-fit flex flex-col sm:justify-center items-center lg:justify-start mt-[100px] sm:mt-0 lg:mt-[95px] px-5 lg:px-0;
+}
+
 /* Movie Page */
 .movie-page {
     @apply relative w-full h-full;
-}
-/* Back button for Movie Page*/
-.back-btn {
-    @apply absolute left-[15px] sm:left-10 lg:left-16 top-7 sm:top-12 z-[2] w-[38px] sm:w-[50px] lg:w-[38px] h-[38px] sm:h-[50px] lg:h-[38px] bg-[#FFFFFF3C] rounded-[50%] flex justify-center items-center backdrop-blur-[3px] lg:hover:bg-[#FFFFFF4C] transition-all duration-200;
 }
 .back-btn span {
     @apply size-6 sm:size-[30px] lg:size-6 mt-[3px];
@@ -350,9 +362,6 @@ footer a {
 .movie-top {
     @apply relative z-[1] h-[calc(100%-235px)] sm:h-[calc(100%-320px)] lg:h-[85%] flex flex-col justify-end px-[15px] sm:px-10 lg:px-16 before:w-full before:h-full before:bg-back-color-2 before:absolute before:left-0 before:top-0 before:-z-[1] before:opacity-30;
 }
-.movie-rating {
-    @apply w-fit px-2 sm:px-3 rounded-[1px] bg-green-500 text-[15px] sm:text-[17px] font-bold mb-[7px] sm:mb-2.5;
-}
 .movie-title {
     @apply text-[23px] sm:text-3xl font-medium;
 }
@@ -371,7 +380,7 @@ footer a {
     @apply bg-[#088AF5] text-[17.5px] sm:text-xl font-medium px-10 sm:px-12 py-3 sm:py-4 rounded-[40px] lg:hover:bg-[#0070ed] transition-all duration-200;
 }
 .add-favorite-btn {
-    @apply p-[13px] sm:p-4 bg-[#FFFFFF3C] rounded-[50%] flex justify-center items-center backdrop-blur-[3px] lg:hover:bg-[#FFFFFF4C] lg:transition-all lg:duration-200;
+    @apply p-[13px] sm:p-4 bg-[#FFFFFF3C] rounded-[50%] flex justify-center items-center backdrop-blur-[3px];
 }
 .add-favorite-btn span {
     @apply size-[22px] sm:size-[24px];
@@ -418,6 +427,14 @@ footer a {
 }
 .movie-trailer.larger iframe {
     @apply lg:w-[85%] xl:w-[75%] 2xl:w-[68%] lg:h-[75%] xl:h-[80%] 2xl:h-[80%] rounded-xl;
+}
+
+/* Edit movie */
+.edit-window {
+    @apply w-full h-screen fixed left-0 top-0 z-10 bg-[#090E17B2] flex justify-center items-center;
+}
+.edit-movie-form {
+    @apply bg-back-color-1 w-full lg:w-fit h-screen lg:h-fit flex flex-col justify-center items-center px-5 lg:py-14 lg:px-16 lg:rounded-xl;
 }
 
 @media (min-width: 1600px) {
