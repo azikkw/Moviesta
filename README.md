@@ -1,75 +1,86 @@
-# Nuxt 3 Minimal Starter
+# Weather Forecast App
 
-Look at the [Nuxt 3 documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
+![Banner](/readme/banner.jpg)
 
-## Setup
+> Moviesta is your ultimate, offering a personalized and immersive experience for movie enthusiasts. Discover trending films, manage your favorites, and dive deep into detailed movie information with an intuitive and visually appealing interface. Whether you want to keep track of what you've added to your favorites, find new recommendations, or simply explore the cinematic world, Moviesta has you covered.
 
-Make sure to install the dependencies:
+#### In this project used:
+1. [TheMovieDatabaseApi (TMDB Api)](https://developer.themoviedb.org/reference/intro/getting-started)
+2. Firebase
 
+---
+
+## 🌐 BASE URL
+You can access `Moviesta` by this link:
+> https://moviesta.onrender.com
+
+---
+
+## 📝 PREPARING FOR IMPORTING
+#### To start importing a project `If you want to run it without docker`, you need to:
+[Node.js](https://nodejs.org/en) version 18.0.0 [min] and more.
+
+## 📤 IMPORTING
+Step-by-step instructions for importing the `Moviesta` project.
+
+#### 1. Downloading
+
+Clone project using the `git clone` command. To do this, you need to go to the command prompt and specify the path to the folder where you will import the project.
+
+Next you will need to enter the following:
 ```bash
-# npm
+git clone https://github.com/azikkw/Moviesta.git
+```
+
+You can also [download ZIP archive](https://github.com/azikkw/Moviesta/archive/refs/heads/main.zip) and unpack it to the folder you want.
+
+#### 2. Building the project with Docker 🐋
+```bash
+make build
+```
+
+#### 3. Building the project with Package Manager
+Since the project does not contain all the necessary dependencies, you will need to install them.
+
+To do this, you need to enter the following command:
+```bash
+# For npm package manager
 npm install
-
-# pnpm
+# For pnpm package manager
 pnpm install
-
-# yarn
+# For yarn package manager
 yarn install
-
-# bun
+# For bun package manager
 bun install
 ```
 
-## Development Server
+---
 
-Start the development server on `http://localhost:3000`:
+## ▶️ PROJECT START
 
+After completing all the steps described in the instructions, you can run the project in two ways:
+
+#### 1. If you built it using Docker 🐋
 ```bash
-# npm
+# To run:
+make run
+```
+```bash
+# To stop
+make stop
+```
+
+#### 2. If you built it using Package Manager
+```bash
+# For npm package manager
 npm run dev
-
-# pnpm
+# For pnpm package manager
 pnpm run dev
-
-# yarn
+# For yarn package manager
 yarn dev
-
-# bun
+# For bun package manager
 bun run dev
 ```
 
-## Production
-
-Build the application for production:
-
-```bash
-# npm
-npm run build
-
-# pnpm
-pnpm run build
-
-# yarn
-yarn build
-
-# bun
-bun run build
-```
-
-Locally preview production build:
-
-```bash
-# npm
-npm run preview
-
-# pnpm
-pnpm run preview
-
-# yarn
-yarn preview
-
-# bun
-bun run preview
-```
-
-Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
+#### 3. Once project is running you can access it at:
+> http://localhost:3000
