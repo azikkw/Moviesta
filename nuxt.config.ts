@@ -27,10 +27,6 @@ export default defineNuxtConfig({
         {
           name: 'description',
           content: 'Discover, track, and enjoy your favorite movies with personalized recommendations and the latest film news, all in one website.'
-        },
-        {
-          name: 'viewport',
-          content: 'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no'
         }
       ]
     }
