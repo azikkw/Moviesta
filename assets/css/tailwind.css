@@ -330,7 +330,19 @@ footer a {
     @apply min-h-[100px] flex justify-center items-center bg-[#0D1421] rounded-lg sm:rounded-[2px] text-xl sm:text-[23px] font-medium text-[#209CF9FF] lg:text-[#209CF9B2] lg:hover:text-[#209CF9FF];
 }
 .create-movie-form {
-    @apply w-full lg:w-fit sm:h-screen lg:h-fit flex flex-col sm:justify-center items-center lg:justify-start mt-[100px] sm:mt-0 lg:mt-[95px] px-5 lg:px-0;
+    @apply w-full lg:w-fit sm:h-screen lg:h-fit flex flex-col sm:justify-center items-center lg:justify-start px-5 lg:px-0;
+}
+.upload-img {
+    @apply relative mb-4 w-full sm:w-[420px] lg:w-[310px] h-[270px] sm:h-[340px] lg:h-[240px] flex justify-center items-center bg-[#0D1421] rounded-lg text-xl sm:text-[23px] font-medium text-[#209CF9FF] lg:text-[#209CF9B2] lg:hover:text-[#209CF9FF];
+}
+#movie-img {
+    @apply hidden;
+}
+.upload-img label {
+    @apply cursor-pointer absolute left-0 top-0 w-full h-full object-cover rounded-lg;
+}
+.upload-img img {
+    @apply cursor-pointer absolute left-0 top-0 w-full h-full object-cover rounded-lg;
 }
 
 /* Movie Page */
@@ -433,8 +445,14 @@ footer a {
 .edit-window {
     @apply w-full h-screen fixed left-0 top-0 z-10 bg-[#090E17B2] flex justify-center items-center;
 }
+.edit {
+    @apply w-full lg:w-fit h-screen overflow-y-auto lg:h-fit flex flex-col lg:flex-row items-center bg-back-color-1 px-5 py-20 lg:py-14 lg:px-16 lg:rounded-xl lg:gap-8;
+}
+.edit .upload-img {
+    @apply w-full lg:w-[360px];
+}
 .edit-movie-form {
-    @apply bg-back-color-1 w-full lg:w-fit h-screen lg:h-fit flex flex-col justify-center items-center px-5 lg:py-14 lg:px-16 lg:rounded-xl;
+    @apply bg-back-color-1 w-full lg:w-fit flex flex-col justify-center items-center;
 }
 
 @media (min-width: 1600px) {

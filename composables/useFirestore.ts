@@ -1,4 +1,5 @@
-import { doc, getDoc, setDoc, deleteDoc, collection, getDocs, updateDoc } from "@firebase/firestore";
+import { collection, deleteDoc, doc, getDoc, getDocs, setDoc, updateDoc } from "@firebase/firestore";
+import { deleteObject, getDownloadURL, ref, uploadBytes } from "@firebase/storage";
 import useFirebaseUser from "~/utils/useFirebaseUser";
 import type { RouteParamValue } from "#vue-router";
 
@@ -50,15 +51,17 @@ export const getFavorites = async () => {
 }
 
 // Create movie function
-export const createMovie = async (movie: any) => {
+export const createMovie = async (movie: any, file: File) => {
     const { $db } = useNuxtApp();
     const user = useFirebaseUser();
 
     if(user) {
-        console.log(movie)
         // @ts-ignore
-        const userCreatedMoviesRef = doc($db, `users/${user}/movies`, movie.id);
-        await setDoc(userCreatedMoviesRef, movie);
+        if(file) {
+            movie.poster_path = await uploadFileAndGetURL(file);
+            const userCreatedMoviesRef = doc($db, `users/${user}/movies`, movie.id);
+            await setDoc(userCreatedMoviesRef, movie);
+        }
     }
 }
 // Get my movies function
@@ -99,12 +102,44 @@ export const removeFromMyMovies = async (id: string | RouteParamValue[]) => {
     }
 }
 // Update movie function
-export const updateMovie = async (id: any, updatedData: any) => {
+export const updateMovie = async (id: any, updatedData: any, file: File) => {
     const { $db } = useNuxtApp();
     const user = useFirebaseUser();
 
     if(user) {
-        const movieDocRef = doc($db, `users/${user}/movies`, id);
-        await updateDoc(movieDocRef, updatedData);
+        if(file) {
+            console.log('file updated')
+            const deleted = await deleteImageFromStorage(updatedData.poster_path);
+            if(deleted) {
+                console.log('file deleted')
+                updatedData.poster_path = await uploadFileAndGetURL(file);
+                const movieDocRef = doc($db, `users/${user}/movies`, id);
+                await updateDoc(movieDocRef, updatedData);
+            }
+        }
+        else {
+            console.log('file not updated')
+            const movieDocRef = doc($db, `users/${user}/movies`, id);
+            await updateDoc(movieDocRef, updatedData);
+        }
+    }
+};
+// Adding image to storage
+const uploadFileAndGetURL = async (file: File) => {
+    const { $storage } = useNuxtApp();
+    const storageReference = ref($storage, `images/${file.name}`);
+    await uploadBytes(storageReference, file);
+    return await getDownloadURL(storageReference);
+};
+// Delete image from storage
+const deleteImageFromStorage = async (imagePath: string) => {
+    const { $storage } = useNuxtApp();
+    const storageReference = ref($storage, imagePath);
+    try {
+        await deleteObject(storageReference);
+        return true;
+    } catch(error) {
+        console.error('Error deleting image:', error);
+        return false;
     }
 };

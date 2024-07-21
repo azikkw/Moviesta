@@ -16,6 +16,15 @@ You can access `Moviesta` by this link:
 
 ---
 
+## 📱 FUNCTIONALITY
+#### In Moviesta user can:
+1. Create an account
+2. Search for movies in the extensive library
+3. Add movies to the `Favorites` collection
+4. Upload your own movies, and also manage them
+
+---
+
 ## 📝 PREPARING FOR IMPORTING
 #### To start importing a project `If you want to run it without docker`, you need to:
 [Node.js](https://nodejs.org/en) version 18.0.0 [min] and more.

@@ -25,16 +25,3 @@ export const logOutUser = async () => {
     return await $auth.signOut()
         .then(() => localStorage.removeItem('user'));
 }
-
-// User Initialization function
-// export const initUser = async () => {
-//     const auth = getAuth();
-//     const firebaseUser = useFirebaseUser();
-//
-//     // @ts-ignore
-//     firebaseUser.value = auth.currentUser?.uid;
-//     onAuthStateChanged(auth, (user) => {
-//         // @ts-ignore
-//         firebaseUser.value = user?.uid;
-//     });
-// }
