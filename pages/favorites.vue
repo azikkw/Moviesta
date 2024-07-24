@@ -20,9 +20,6 @@
 
   onMounted(async () => {
     favorites.value = await getFavorites();
-    onUnmounted(async () => {
-      favorites.value = await getFavorites();
-    });
   });
 
 </script>

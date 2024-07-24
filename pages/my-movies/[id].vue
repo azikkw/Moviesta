@@ -137,4 +137,18 @@
 
 <style scoped>
 
+  /* Edit movie */
+  .edit-window {
+    @apply w-full h-screen fixed left-0 top-0 z-10 bg-[#090E17B2] flex justify-center items-center;
+  }
+  .edit {
+    @apply w-full lg:w-fit h-screen overflow-y-auto lg:h-fit flex flex-col lg:flex-row items-center bg-back-color-1 px-5 py-20 lg:py-14 lg:px-16 lg:rounded-xl lg:gap-8;
+  }
+  .edit .upload-img {
+    @apply w-full lg:w-[360px];
+  }
+  .edit-movie-form {
+    @apply bg-back-color-1 w-full lg:w-fit flex flex-col justify-center items-center;
+  }
+
 </style>

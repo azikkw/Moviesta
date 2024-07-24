@@ -6,7 +6,7 @@
       <form @submit.prevent="signUp" class="auth-form">
         <input class="form-input" v-model="email" type="email" placeholder="Enter email...." required />
         <input class="form-input" v-model="password" type="password" placeholder="Enter password...." required />
-        <p v-if="errorMessage.length > 0" class="error-message">{{errorMessage}}</p>
+        <ErrorMessage :errorMessage="errorMessage"/>
         <button class="form-btn" type="submit" aria-label="Submit btn">Sign Up</button>
       </form>
       <NuxtLink class="link-to" to="/login">Already have an account? <p class="text-[#209CF9] font-medium">Log In</p></NuxtLink>

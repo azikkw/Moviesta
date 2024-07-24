@@ -105,4 +105,16 @@
 
 <style scoped>
 
+  /* Home Page */
+  .home-page {
+    @apply w-full overflow-x-hidden py-10;
+  }
+  .home-title {
+    @apply px-[15px] lg:px-16 text-xl lg:text-2xl font-medium;
+  }
+  /* Home page suggestion movies lists styles */
+  .home-list {
+    @apply w-full flex flex-col relative mb-8;
+  }
+
 </style>

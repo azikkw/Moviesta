@@ -9,7 +9,7 @@
         <label for="movie-img"></label>
         <p>Choose Image</p>
       </div>
-      <p v-if="errorMessage.length > 0" class="error-message mb-4">{{errorMessage}}</p>
+      <ErrorMessage class="mb-4" :errorMessage="errorMessage"/>
       <input class="form-input" v-model="formData.title" type="text" placeholder="Movie title...." required />
       <textarea class="form-textarea" v-model="formData.overview" placeholder="Movie description...." required />
       <input class="form-input" v-model="formData.rating" type="number" step="0.1" min="0" max="10" placeholder="Movie rating...." required />
@@ -74,5 +74,10 @@
 </script>
 
 <style scoped>
+
+  /* Create movie button */
+  .create-movie-form {
+    @apply w-full lg:w-fit sm:h-screen lg:h-fit flex flex-col sm:justify-center items-center lg:justify-start px-5 lg:px-0;
+  }
 
 </style>
