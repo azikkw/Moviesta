@@ -108,10 +108,8 @@ export const updateMovie = async (id: any, updatedData: any, file: File) => {
 
     if(user) {
         if(file) {
-            console.log('file updated')
             const deleted = await deleteImageFromStorage(updatedData.poster_path);
             if(deleted) {
-                console.log('file deleted')
                 updatedData.poster_path = await uploadFileAndGetURL(file);
                 const movieDocRef = doc($db, `users/${user}/movies`, id);
                 await updateDoc(movieDocRef, updatedData);

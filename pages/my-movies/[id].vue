@@ -24,7 +24,7 @@
     <div v-if="isOpened" class="edit-window">
       <div class="edit">
         <Icon @click="closeEditWindow" name="solar:close-circle-broken" class="absolute right-5 sm:right-10 top-6 sm:top-10 size-[38px] sm:size-[50px] lg:size-[40px] cursor-pointer text-[#209CF9]" />
-        <div class="w-full">
+        <div class="w-full sm:w-[420px] lg:w-fit">
           <p class="text-xl sm:text-2xl lg:text-xl font-medium mb-4">Edit movie</p>
           <div class="upload-img">
             <input type="file" id="movie-img" @change="onFileChange" />
@@ -32,12 +32,13 @@
             <label for="movie-img"></label>
             <p>Choose Image</p>
           </div>
+          <ErrorMessage class="text-center mb-4" :errorMessage="errorMessage"/>
         </div>
         <form @submit.prevent="submitUpdatedMovie" class="edit-movie-form">
           <input class="form-input" v-model="formData.title" type="text" placeholder="Movie title...." required />
           <textarea class="form-textarea" v-model="formData.overview" placeholder="Movie description...." required />
           <input class="form-input" v-model="formData.rating" type="number" step="0.1" min="0" max="10"  placeholder="Movie rating...." required />
-          <input class="form-input" v-model="formData.release_date" type="text" placeholder="Movie release year...." required />
+          <input class="form-input" v-model="formData.release_date" type="text" placeholder="Movie release year...." pattern="^(18|19|20)\d{2}$" required />
           <p v-if="uploadStatus.length > 0" class="text-[15px] sm:text-[16px] lg:text-[14.5px] font-medium">{{ uploadStatus }}</p>
           <button class="form-btn" type="submit" aria-label="Submit btn">Edit</button>
         </form>
@@ -65,6 +66,7 @@
     release_date: '',
   });
   const isOpened = ref(false);
+  const errorMessage = ref('');
 
   const file = ref(null);
   const imageURL = ref('');
@@ -122,12 +124,17 @@
 
   // Update movie function
   const submitUpdatedMovie = async () => {
+    const validImageTypes = ['image/jpeg', 'image/png', 'image/webp'];
     try {
-      uploadStatus.value = 'Updating your movie....';
-      await updateMovie(id, formData.value, file.value)
-        .then(() => movie.value = deepCopy(formData.value));
-      uploadStatus.value = '';
-      closeEditWindow();
+      if(file.value && !validImageTypes.includes(file.value.type)) {
+        errorMessage.value = defineError('invalid type');
+      } else {
+        uploadStatus.value = 'Updating your movie....';
+        await updateMovie(id, formData.value, file.value)
+          .then(() => movie.value = deepCopy(formData.value));
+        uploadStatus.value = '';
+        closeEditWindow();
+      }
     } catch(error) {
       console.log(error.code);
     }

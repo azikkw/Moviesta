@@ -13,7 +13,7 @@
       <input class="form-input" v-model="formData.title" type="text" placeholder="Movie title...." required />
       <textarea class="form-textarea" v-model="formData.overview" placeholder="Movie description...." required />
       <input class="form-input" v-model="formData.rating" type="number" step="0.1" min="0" max="10" placeholder="Movie rating...." required />
-      <input class="form-input" v-model="formData.release_date" type="text" placeholder="Movie release year...." required />
+      <input class="form-input" v-model="formData.release_date" type="text" placeholder="Movie release year...." pattern="^(18|19|20)\d{2}$" required />
       <p v-if="uploadStatus.length > 0" class="text-[15px] sm:text-[16px] lg:text-[14.5px] font-medium">{{ uploadStatus }}</p>
       <button class="form-btn" type="submit" aria-label="Submit btn">Create</button>
     </form>
@@ -55,9 +55,12 @@
   });
 
   const submitMovie = async () => {
+    const validImageTypes = ['image/jpeg', 'image/png', 'image/webp'];
     try {
       if(!file.value) {
         errorMessage.value = defineError('not image');
+      } else if(!validImageTypes.includes(file.value.type)) {
+        errorMessage.value = defineError('invalid type');
       } else {
         uploadStatus.value = 'Uploading your movie....';
         await createMovie({

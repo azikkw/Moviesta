@@ -7,6 +7,8 @@ export default function (error: any) {
         return 'Wrong email or password.'
     } else if(error === 'not image') {
         return 'Image not uploaded.'
+    } else if(error === 'invalid type') {
+        return 'Upload image jpg/png/webp.'
     }
     return 'Something went wrong! Try again.';
 }
