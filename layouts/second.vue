@@ -9,8 +9,8 @@
   const router = useRouter();
 
   onMounted(async () => {
-    if(!localStorage.getItem('moviesta-user')) {
-      await router.replace('/login');
+    if(localStorage.getItem('moviesta-user')) {
+      await router.replace('/');
     }
   });
 
