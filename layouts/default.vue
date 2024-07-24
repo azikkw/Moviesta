@@ -48,7 +48,7 @@
   const router = useRouter();
 
   onMounted(async () => {
-    if(!localStorage.getItem('user')) {
+    if(!localStorage.getItem('moviesta-user')) {
       await router.replace('/login');
     }
   });
