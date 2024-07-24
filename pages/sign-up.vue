@@ -25,7 +25,7 @@
   const router = useRouter();
 
   definePageMeta({
-    layout: 'second',
+    layout: 'auth',
   });
   onMounted(async () => {
     if(localStorage.getItem('user')) {

@@ -23,7 +23,7 @@
 <script setup>
 
   definePageMeta({
-    layout: 'second'
+    layout: 'movie-page'
   });
   useHead({
     title: 'Create movie | Moviesta',

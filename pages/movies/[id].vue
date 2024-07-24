@@ -48,7 +48,7 @@
   import { ref } from 'vue';
 
   definePageMeta({
-    layout: 'second'
+    layout: 'movie-page'
   });
 
   const { id } = useRoute().params;

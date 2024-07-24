@@ -25,7 +25,7 @@
   const errorMessage = ref('');
 
   definePageMeta({
-    layout: 'second'
+    layout: 'auth'
   });
   onMounted(async () => {
     if(localStorage.getItem('user')) {
