@@ -1,4 +1,4 @@
-# Weather Forecast App
+# Moviesta
 
 ![Banner](/readme/banner.jpg)
 
