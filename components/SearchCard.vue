@@ -1,6 +1,9 @@
 <template>
   <NuxtLink :to="`/movies/${movie.id}`" class="result-card">
-    <NuxtImg loading="lazy" :src="`https://image.tmdb.org/t/p/w185${movie.poster_path}`" alt="Search Image" />
+    <picture>
+      <source v-if="movie.poster_path" :srcset="`https://image.tmdb.org/t/p/w185${movie.poster_path}`">
+      <NuxtImg loading="lazy" :src="`/no-image.png`" alt="Search Image"/>
+    </picture>
     <div class="result-movie-info">
       <p>{{movie.title}}</p>
       <p>{{movie.release_date.slice(0, 4)}}</p>
@@ -22,7 +25,7 @@
     @apply mb-[100px] lg:mb-0;
   }
   .result-card img {
-    @apply w-[52px] sm:w-[70px] lg:w-[52px] h-auto;
+    @apply w-[52px] sm:w-[70px] lg:w-[52px];
   }
   .result-movie-info {
     @apply flex-1 overflow-hidden font-medium lg:font-normal;

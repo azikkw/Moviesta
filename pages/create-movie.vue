@@ -14,7 +14,7 @@
       <textarea class="form-textarea" v-model="formData.overview" placeholder="Movie description...." required />
       <input class="form-input" v-model="formData.rating" type="number" step="0.1" min="0" max="10" placeholder="Movie rating...." required />
       <input class="form-input" v-model="formData.release_date" type="text" placeholder="Movie release year...." pattern="^(18|19|20)\d{2}$" required />
-      <p v-if="uploadStatus.length > 0" class="text-[15px] sm:text-[16px] lg:text-[14.5px] font-medium">{{ uploadStatus }}</p>
+      <p v-if="uploadStatus.length > 0" class="text-[15px] sm:text-[16px] lg:text-[14.5px] font-medium">{{uploadStatus}}</p>
       <button class="form-btn" type="submit" aria-label="Submit btn">Create</button>
     </form>
   </div>

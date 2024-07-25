@@ -176,7 +176,7 @@ body::-webkit-scrollbar-thumb {
 }
 /* Movie Poster*/
 .movie-poster {
-    @apply w-full lg:h-screen lg:object-cover absolute left-0 top-0 z-[0];
+    @apply w-full h-[90%] lg:h-screen object-cover absolute left-0 top-0 z-[0];
 }
 .poster-shadow {
     @apply w-full h-[55px] bg-back-color-2 absolute left-0 bottom-0 lg:-bottom-16 -z-[1];

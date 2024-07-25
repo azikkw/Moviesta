@@ -33,9 +33,9 @@
       </ul>
     </div>
     <picture class="movie-poster">
-      <source :srcset="`https://image.tmdb.org/t/p/original${movie.backdrop_path}`" media="(min-width: 1024px)">
-      <source :srcset="`https://image.tmdb.org/t/p/original${movie.poster_path}`" media="(max-width: 1023px)">
-      <NuxtImg class="movie-poster" loading="lazy" :src="`https://image.tmdb.org/t/p/original${movie.poster_path}`" alt="poster"/>
+      <source v-if="movie.backdrop_path" :srcset="`https://image.tmdb.org/t/p/original${movie.backdrop_path}`" media="(min-width: 1024px)">
+      <source v-if="movie.poster_path" :srcset="`https://image.tmdb.org/t/p/original${movie.poster_path}`" media="(max-width: 1023px)">
+      <NuxtImg class="movie-poster" loading="lazy" :src="`/no-image.png`" alt="poster"/>
     </picture>
     <div @click="closeTrailer" class="movie-trailer larger" :class="{'active': isOpened}">
       <iframe :src="`https://www.youtube.com/embed/${getTrailer}`" allowfullscreen/>
@@ -73,16 +73,18 @@
 
   // Getting certification for movie
   const getCertification = computed(() => {
-    return movie.value.releases.countries.find(release => release.iso_3166_1 === 'US').certification;
+    const certification = movie.value.releases.countries[0]?.certification;
+    if(certification && certification !== '') return certification
+    return '-';
   });
   // Getting trailer key for YouTube iframe
   const getTrailer = computed(() => {
-    return movie.value.videos.results.findLast(video => video.type === 'Trailer').key;
+    return movie.value.videos.results.findLast(video => video.type === 'Trailer')?.key;
   });
 
   // Trailer window options
   const openTrailer = () => {
-    if(window.innerWidth > 1024) {
+    if(window.innerWidth > 1024 && getTrailer !== null) {
       isOpened.value = true;
       // Prevent scrolling
       document.body.style.overflow = 'hidden';
